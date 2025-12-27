@@ -59,6 +59,9 @@ def main [--cmd : string ] {
                         homebrew = {
                             enable = true;
 			    user = "t";
+			    taps = [
+				"daipeihust/tap"
+			    ];
                             brews = [
 				"autoconf"
 				"automake"
@@ -76,7 +79,7 @@ def main [--cmd : string ] {
 				"go"
 				"guile"
 				"harfbuzz"
-				# "im-select"
+				"im-select"
 				"imagemagick"
 				"jq"
 				"just"
