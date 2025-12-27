@@ -29,7 +29,7 @@
                 system = "aarch64-darwin";
 
                 modules = [
-                    {
+                    ({ config, pkgs, ... }: {
                         system = {
                             stateVersion = 5;
                             primaryUser = "t";
@@ -38,6 +38,23 @@
 			environment.systemPath = [
 			  "/opt/homebrew/bin"
 			  "/opt/homebrew/sbin"
+			];
+			environment.systemPackages = [
+			  (pkgs.writeTextFile {
+			    name = "nu_in_nvim";
+			    destination = "/bin/nu_in_nvim";
+			    executable = true;
+			    text = ''
+#!/usr/bin/env nu
+def main [--cmd : string ] {
+  if $cmd != null {
+    nu -c $cmd
+  } else {
+    nu -e "$env.RUN_IN_NVIM = true"
+  }
+}
+			    '';
+			  })
 			];
                         homebrew = {
                             enable = true;
@@ -106,13 +123,14 @@
 				"codex"
 				"copilot-cli"
 				"discord"
+				"font-hackgen-nerd"
 				"openscad@snapshot"
 				"slack"
 				"steam"
 				"vnc-viewer"
                             ];
                         };
-                    }
+                    })
                     home-manager.darwinModules.home-manager
                 ];
             };
