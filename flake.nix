@@ -65,6 +65,14 @@
                   pkgs.nixfmt
                   pkgs.nodejs
                   pkgs.qmk
+                  pkgs.tmux
+                  pkgs.ripgrep
+                  pkgs.fzf
+                  pkgs.git
+                  pkgs.direnv
+                  pkgs.jq
+                  pkgs.tree
+                  pkgs.unzip
                 ];
                 homebrew = {
                   enable = true;
@@ -81,17 +89,14 @@
                     "direnv"
                     "emscripten"
                     "ffmpeg"
-                    "fzf"
                     "gh"
                     "ghcup"
-                    "git"
                     "gnuplot"
                     "go"
                     "guile"
                     "harfbuzz"
                     "im-select"
                     "imagemagick"
-                    "jq"
                     "just"
                     "libtool"
                     "libyaml"
@@ -113,7 +118,6 @@
                     "python-matplotlib"
                     "readline"
                     "redo"
-                    "ripgrep"
                     "rlwrap"
                     "sevenzip"
                     "shellcheck"
@@ -121,11 +125,8 @@
                     "swi-prolog"
                     "terminal-notifier"
                     "tesseract"
-                    "tmux"
-                    "tree"
                     "tree-sitter"
                     "unixodbc"
-                    "unzip"
                     "uv"
                     "vhs"
                     "wasm-tools"
