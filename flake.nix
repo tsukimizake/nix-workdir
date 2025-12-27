@@ -73,6 +73,43 @@
                   pkgs.jq
                   pkgs.tree
                   pkgs.unzip
+                  pkgs.autoconf
+                  pkgs.automake
+                  pkgs.cmigemo
+                  pkgs.coreutils
+                  pkgs.emscripten
+                  pkgs.ffmpeg
+                  pkgs.gh
+                  pkgs.gnuplot
+                  pkgs.go
+                  pkgs.guile
+                  pkgs.harfbuzz
+                  pkgs.imagemagick
+                  pkgs.just
+                  pkgs.libtool
+                  pkgs.libyaml
+                  pkgs.luarocks
+                  pkgs.neovim-remote
+                  pkgs.nim
+                  pkgs.ninja
+                  pkgs.nushell
+                  pkgs.opam
+                  pkgs.pkgconf
+                  pkgs.poppler
+                  pkgs.protobuf
+                  pkgs.readline
+                  pkgs.redo
+                  pkgs.rlwrap
+                  pkgs.shellcheck
+                  pkgs.sox
+                  pkgs.tesseract
+                  pkgs.terminal-notifier
+                  pkgs.tree-sitter
+                  pkgs.uv
+                  pkgs.vhs
+                  pkgs.wasm-tools
+                  pkgs.wasmtime
+                  pkgs.wxwidgets_3_3
                 ];
                 homebrew = {
                   enable = true;
@@ -81,57 +118,19 @@
                     "daipeihust/tap"
                   ];
                   brews = [
-                    "autoconf"
-                    "automake"
                     "awscli"
-                    "cmigemo"
-                    "coreutils"
-                    "direnv"
-                    "emscripten"
-                    "ffmpeg"
-                    "gh"
                     "ghcup"
-                    "gnuplot"
-                    "go"
-                    "guile"
-                    "harfbuzz"
                     "im-select"
-                    "imagemagick"
-                    "just"
-                    "libtool"
-                    "libyaml"
-                    "luarocks"
                     "mise"
+                    "unixodbc"
                     {
                       name = "neovim";
                       args = [ "HEAD" ];
                     }
-                    "neovim-remote"
-                    "nim"
-                    "ninja"
-                    "nushell"
-                    "opam"
                     "openssl@3"
-                    "pkgconf"
-                    "poppler"
-                    "protobuf"
                     "python-matplotlib"
-                    "readline"
-                    "redo"
-                    "rlwrap"
                     "sevenzip"
-                    "shellcheck"
-                    "sox"
                     "swi-prolog"
-                    "terminal-notifier"
-                    "tesseract"
-                    "tree-sitter"
-                    "unixodbc"
-                    "uv"
-                    "vhs"
-                    "wasm-tools"
-                    "wasmtime"
-                    "wxwidgets"
                   ];
                   casks = [
                     "alacritty"
