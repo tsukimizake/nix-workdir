@@ -1,0 +1,8 @@
+#!/usr/bin/env nu
+def main [--cmd (-c) : string ] {
+  if $cmd != null {
+    nu -c $cmd
+  } else {
+    nu -e "$env.RUN_IN_NVIM = true"
+  }
+}

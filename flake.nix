@@ -51,16 +51,7 @@
                     name = "nu_in_nvim";
                     destination = "/bin/nu_in_nvim";
                     executable = true;
-                    text = ''
-                      #!/usr/bin/env nu
-                      def main [--cmd (-c) : string ] {
-                        if $cmd != null {
-                          nu -c $cmd
-                        } else {
-                          nu -e "$env.RUN_IN_NVIM = true"
-                        }
-                      }
-                      			    '';
+                    text = builtins.readFile ./nu_in_nvim;
                   })
                   pkgs.nixfmt
                   pkgs.nodejs
@@ -110,6 +101,9 @@
                   pkgs.wasm-tools
                   pkgs.wasmtime
                   pkgs.wxwidgets_3_3
+                  pkgs.openssl_3_6
+                  pkgs.mise
+                  pkgs.awscli
                 ];
                 homebrew = {
                   enable = true;
@@ -118,18 +112,12 @@
                     "daipeihust/tap"
                   ];
                   brews = [
-                    "awscli"
-                    "ghcup"
                     "im-select"
-                    "mise"
                     "unixodbc"
                     {
                       name = "neovim";
                       args = [ "HEAD" ];
                     }
-                    "openssl@3"
-                    "python-matplotlib"
-                    "sevenzip"
                     "swi-prolog"
                   ];
                   casks = [
