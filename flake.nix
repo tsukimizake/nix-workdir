@@ -53,7 +53,7 @@
                     executable = true;
                     text = ''
                       #!/usr/bin/env nu
-                      def main [--cmd : string ] {
+                      def main [--cmd (-c) : string ] {
                         if $cmd != null {
                           nu -c $cmd
                         } else {
@@ -64,6 +64,7 @@
                   })
                   pkgs.nixfmt
                   pkgs.nodejs
+                  pkgs.qmk
                 ];
                 homebrew = {
                   enable = true;
@@ -110,7 +111,6 @@
                     "poppler"
                     "protobuf"
                     "python-matplotlib"
-                    # "qmk"
                     "readline"
                     "redo"
                     "ripgrep"
