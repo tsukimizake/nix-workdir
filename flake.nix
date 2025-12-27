@@ -55,6 +55,7 @@ def main [--cmd : string ] {
 }
 			    '';
 			  })
+			  pkgs.nodejs
 			];
                         homebrew = {
                             enable = true;
@@ -126,6 +127,7 @@ def main [--cmd : string ] {
 				"codex"
 				"copilot-cli"
 				"discord"
+				"docker"
 				"font-hackgen-nerd"
 				"openscad@snapshot"
 				"slack"
