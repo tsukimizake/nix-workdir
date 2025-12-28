@@ -142,9 +142,15 @@
               {
                 home-manager = {
                   users.t =
-                    { ... }:
+                    { pkgs, ... }:
                     {
                       home.stateVersion = "23.11";
+                      home.packages = [
+                        pkgs.hackgen-nf-font
+                      ];
+                      home.file.".config/alacritty/alacritty.toml" = {
+                        source = ./alacritty.toml;
+                      };
                       home.file."Library/Application Support/nushell" = {
                         source = ./nushell-config;
                         recursive = true;
