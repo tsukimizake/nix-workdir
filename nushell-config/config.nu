@@ -919,4 +919,7 @@ export extern mask [ ...args: string@"nu-complete mask" ]
 alias j = ^just --choose
 
 
-use ($nu.default-config-dir | path join mise.nu)
+const mise_path = $nu.cache-dir | path join mise.nu
+if ($mise_path | path exists) {
+    source $mise_path
+}

@@ -107,5 +107,8 @@ prepend_path $'($env.BUN_INSTALL)/bin'
 $env.DENOPS_TEST_DENOPS_PATH = "/Users/tsukimizake/denops.vim/"
 $env.EDITOR = "nvim"
 
-let mise_path = $nu.default-config-dir | path join mise.nu
+let mise_path = $nu.cache-dir | path join mise.nu
+if not ($nu.cache-dir | path exists) {
+    mkdir $nu.cache-dir
+}
 ^mise activate nu | save $mise_path --force
