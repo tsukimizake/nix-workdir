@@ -145,6 +145,10 @@
                     { ... }:
                     {
                       home.stateVersion = "23.11";
+                      home.file."Library/Application Support/nushell" = {
+                        source = ./nushell-config;
+                        recursive = true;
+                      };
                       programs.tmux = {
                         enable = true;
                         extraConfig = builtins.readFile ./tmux.conf;
