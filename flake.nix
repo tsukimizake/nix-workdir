@@ -61,49 +61,21 @@
                   pkgs.fzf
                   pkgs.git
                   pkgs.direnv
-                  pkgs.jq
-                  pkgs.tree
-                  pkgs.unzip
                   pkgs.autoconf
                   pkgs.automake
                   pkgs.cmigemo
-                  pkgs.coreutils
-                  pkgs.emscripten
-                  pkgs.ffmpeg
                   pkgs.gh
-                  pkgs.gnuplot
-                  pkgs.go
-                  pkgs.guile
-                  pkgs.harfbuzz
-                  pkgs.imagemagick
                   pkgs.just
-                  pkgs.libtool
-                  pkgs.libyaml
                   pkgs.luarocks
                   pkgs.neovim-remote
-                  pkgs.nim
-                  pkgs.ninja
                   pkgs.nushell
-                  pkgs.opam
-                  pkgs.pkgconf
-                  pkgs.poppler
-                  pkgs.protobuf
-                  pkgs.readline
                   pkgs.redo
                   pkgs.rlwrap
-                  pkgs.shellcheck
-                  pkgs.sox
-                  pkgs.tesseract
                   pkgs.terminal-notifier
                   pkgs.tree-sitter
-                  pkgs.uv
-                  pkgs.vhs
                   pkgs.wasm-tools
                   pkgs.wasmtime
-                  pkgs.wxwidgets_3_3
-                  pkgs.openssl_3_6
                   pkgs.mise
-                  pkgs.awscli
                 ];
                 homebrew = {
                   enable = true;
@@ -127,7 +99,6 @@
                     "copilot-cli"
                     "discord"
                     "docker"
-                    "font-hackgen-nerd"
                     "openscad@snapshot"
                     "slack"
                     "steam"
