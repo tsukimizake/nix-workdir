@@ -57,6 +57,7 @@
                   pkgs.nodejs
                   pkgs.qmk
                   pkgs.tmux
+                  pkgs.ninja
                   pkgs.ripgrep
                   pkgs.fzf
                   pkgs.git
@@ -76,6 +77,7 @@
                   pkgs.wasm-tools
                   pkgs.wasmtime
                   pkgs.mise
+                  pkgs.emacs
                 ];
                 homebrew = {
                   enable = true;
