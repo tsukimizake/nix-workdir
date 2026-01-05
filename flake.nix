@@ -35,11 +35,11 @@
               {
                 system = {
                   stateVersion = 5;
-                  primaryUser = "t";
+                  primaryUser = "tsukimizake";
                 };
-                users.users.t = {
-                  name = "t";
-                  home = "/Users/t";
+                users.users.tsukimizake = {
+                  name = "tsukimizake";
+                  home = "/Users/tsukimizake";
                 };
 
                 environment.systemPath = [
@@ -81,7 +81,7 @@
                 ];
                 homebrew = {
                   enable = true;
-                  user = "t";
+                  user = "tsukimizake";
                   taps = [
                     "daipeihust/tap"
                   ];
@@ -115,7 +115,7 @@
               { ... }:
               {
                 home-manager = {
-                  users.t =
+                  users.tsukimizake =
                     { pkgs, ... }:
                     {
                       home.stateVersion = "23.11";
