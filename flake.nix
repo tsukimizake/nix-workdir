@@ -102,6 +102,7 @@
                     "discord"
                     "docker"
                     "openscad@snapshot"
+                    "prusaslicer"
                     "slack"
                     "steam"
                     "vnc-viewer"
