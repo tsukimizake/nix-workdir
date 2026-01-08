@@ -100,12 +100,13 @@
                     "codex"
                     "copilot-cli"
                     "discord"
-                    "docker"
+                    "docker-desktop"
                     "openscad@snapshot"
                     "prusaslicer"
                     "slack"
                     "steam"
                     "vnc-viewer"
+                    "azookey"
                   ];
                 };
               }
