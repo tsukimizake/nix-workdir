@@ -107,6 +107,7 @@
                     "steam"
                     "vnc-viewer"
                     "azookey"
+                    "claude-code"
                   ];
                 };
               }
