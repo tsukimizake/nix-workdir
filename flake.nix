@@ -97,8 +97,6 @@
                   casks = [
                     "alacritty"
                     "amethyst"
-                    "codex"
-                    "copilot-cli"
                     "discord"
                     "docker-desktop"
                     "openscad@snapshot"
