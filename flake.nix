@@ -106,6 +106,7 @@
                     "vnc-viewer"
                     "azookey"
                     "claude-code"
+                    "forklift"
                   ];
                 };
               }
