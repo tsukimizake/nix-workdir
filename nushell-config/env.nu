@@ -21,7 +21,7 @@ def create_left_prompt [] {
     let separator_color = (if (is-admin) { ansi light_red_bold } else { ansi light_green_bold })
     let path_segment = $"($path_color)($dir)"
 
-    $path_segment | str replace --all (char path_sep) $"($separator_color)/($path_color)"
+    $path_segment | str replace --all (char path_sep) $"($separator_color)/($path_color)\n"
 }
 
 def create_right_prompt [] {
@@ -51,7 +51,7 @@ $env.PROMPT_COMMAND = {|| create_left_prompt }
 $env.PROMPT_INDICATOR = {|| "> " }
 $env.PROMPT_MULTILINE_INDICATOR = {|| "::: " }
 $env.PROMPT_COMMAND_RIGHT = {|| "" }
-$env.PROMPT_COMMAND = {|| $"(ansi reset)(ansi magenta)(date now | format date "%Y-%m-%dT%H:%M:%S%z")\n(pwd)\n\n" }
+$env.PROMPT_COMMAND = {|| $"(ansi reset)(ansi magenta)(date now | format date "%Y-%m-%dT%H:%M:%S%z")\n(pwd)" }
 
 # Specifies how environment variables are:
 # - converted from a string to a value on Nushell startup (from_string)
@@ -98,7 +98,6 @@ prepend_path '/Users/tsukimizake/.cabal/bin'
 prepend_path '/Users/tsukimizake/.local/bin'
 prepend_path '/Users/tsukimizake/.deno/bin'
 prepend_path '/Users/tsukimizake/.claude/local/'
-
 
 $env.BUN_INSTALL = $"($env.HOME)/.bun"
 prepend_path $'($env.BUN_INSTALL)/bin'

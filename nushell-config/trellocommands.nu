@@ -28,10 +28,12 @@ export module trello {
   }
 
   export def fzf_my_cards [] {
-    let res = ^npx trello card:assigned-to | parse "{name} (ID: {id}, Board: {board}, List: {list})"
+    let res = ^npx trello card:assigned-to 
+    | parse "{name} (ID: {id}, Board: {board}, List: {list})"
+    | where {|| $in | get list | not ($in =~ "Done" or $in =~ "改修完了")}
 
-    let chosen = $res | fzflist name 
-    get_card_code $chosen.board $chosen.list $chosen.name
+  let chosen = $res | fzflist name 
+   get_card_code $chosen.board $chosen.list $chosen.name
   }
 
 

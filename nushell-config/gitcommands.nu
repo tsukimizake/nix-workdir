@@ -27,6 +27,10 @@ export def del [branch_name : string@gdel_completion] {
   git branch -D $branch_name
 }
 
+def gdel_completion [] {
+  git branch | lines | each { str substring 2.. | str trim }
+}
+
 export def switch [branch_name : string@gswitch_completion] {
   git switch $branch_name
 }
@@ -35,9 +39,6 @@ def gswitch_completion [] {
   git branch | lines | each { str substring 2.. | str trim } | where { |s| not ($s | str starts-with "_") }
 }
 
-def gdel_completion [] {
-  git branch | lines | each { str substring 2.. | str trim }
-}
 
 export def finish [] {
   let prev_branch = (git rev-parse --abbrev-ref HEAD)

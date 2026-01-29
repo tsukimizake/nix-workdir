@@ -845,7 +845,6 @@ module plug {
   }
 
   def gc [] {
-  # (plugins_file) は $(plugins_file) と同じ
     open (plugins_file)
       | lines
       | uniq
