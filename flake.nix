@@ -53,6 +53,9 @@
                     executable = true;
                     text = builtins.readFile ./nu_in_nvim;
                   })
+                  (pkgs.writeShellScriptBin "claude-code-acp" ''
+                    exec ${pkgs.nodejs}/bin/npx @zed-industries/claude-code-acp "$@"
+                  '')
                   pkgs.nixfmt
                   pkgs.nodejs
                   pkgs.qmk
@@ -99,6 +102,7 @@
                     "amethyst"
                     "discord"
                     "docker-desktop"
+                    "neovide"
                     "openscad@snapshot"
                     "prusaslicer"
                     "slack"
@@ -106,6 +110,7 @@
                     "vnc-viewer"
                     "azookey"
                     "claude-code"
+                    "copilot-cli"
                     "forklift"
                   ];
                 };
@@ -113,22 +118,24 @@
             )
             home-manager.darwinModules.home-manager
             (
-              { ... }:
+              { config, ... }:
               {
                 home-manager = {
                   users.tsukimizake =
-                    { pkgs, ... }:
+                    { pkgs, config, ... }:
+                    let
+                      workdir = "/Users/tsukimizake/workdir";
+                    in
                     {
                       home.stateVersion = "23.11";
                       home.packages = [
                         pkgs.hackgen-nf-font
                       ];
                       home.file.".config/alacritty/alacritty.toml" = {
-                        source = ./alacritty.toml;
+                        source = config.lib.file.mkOutOfStoreSymlink "${workdir}/alacritty.toml";
                       };
                       home.file."Library/Application Support/nushell" = {
-                        source = ./nushell-config;
-                        recursive = true;
+                        source = config.lib.file.mkOutOfStoreSymlink "${workdir}/nushell-config";
                       };
                       programs.tmux = {
                         enable = true;
