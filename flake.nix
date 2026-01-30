@@ -56,6 +56,9 @@
                   (pkgs.writeShellScriptBin "claude-code-acp" ''
                     exec ${pkgs.nodejs}/bin/npx @zed-industries/claude-code-acp "$@"
                   '')
+                  (pkgs.writeShellScriptBin "trello" ''
+                    exec ${pkgs.nodejs}/bin/npx @anthropic/trello-mcp-server "$@"
+                  '')
                   pkgs.nixfmt
                   pkgs.nodejs
                   pkgs.qmk
