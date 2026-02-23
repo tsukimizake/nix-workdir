@@ -24,9 +24,10 @@
       home-manager,
       nix-darwin,
     }:
-    {
-      darwinConfigurations = {
-        "tsukimizakenoMacBook-Pro" = nix-darwin.lib.darwinSystem {
+    let
+      mkDarwinSystem =
+        hostname:
+        nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
 
           modules = [
@@ -102,7 +103,7 @@
                     "swi-prolog"
                   ];
                   casks = [
-                    "alacritty"
+                    "ghostty"
                     "amethyst"
                     "discord"
                     "figma"
@@ -159,6 +160,14 @@
             )
           ];
         };
-      };
+    in
+    {
+      darwinConfigurations =
+        let
+          host = builtins.getEnv "HOST";
+          hn = if host != "" then host else builtins.getEnv "HOSTNAME";
+          hostname = if hn != "" then builtins.head (nixpkgs.lib.splitString "." hn) else "";
+        in
+        if hostname != "" then { ${hostname} = mkDarwinSystem hostname; } else { };
     };
 }
