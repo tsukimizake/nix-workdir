@@ -164,10 +164,8 @@
     {
       darwinConfigurations =
         let
-          host = builtins.getEnv "HOST";
-          hn = if host != "" then host else builtins.getEnv "HOSTNAME";
-          hostname = if hn != "" then builtins.head (nixpkgs.lib.splitString "." hn) else "";
+          hostname = builtins.getEnv "HOST";
         in
-        if hostname != "" then { ${hostname} = mkDarwinSystem hostname; } else { };
+        { ${hostname} = mkDarwinSystem hostname; };
     };
 }
