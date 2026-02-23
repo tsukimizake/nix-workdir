@@ -139,12 +139,15 @@
                       ];
                       home.file.".config/alacritty/alacritty.toml" = {
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/alacritty.toml";
+                        force = true;
                       };
                       home.file."Library/Application Support/nushell" = {
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/nushell-config";
+                        force = true;
                       };
                       home.file."Library/Application Support/com.mitchellh.ghostty/config" = {
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/ghostty-config";
+                        force = true;
                       };
                       programs.tmux = {
                         enable = true;
