@@ -166,6 +166,8 @@
         let
           hostname = builtins.getEnv "HOST";
         in
-        { ${hostname} = mkDarwinSystem hostname; };
+        {
+          ${hostname} = mkDarwinSystem hostname;
+        };
     };
 }
