@@ -1,0 +1,10 @@
+# Ghostty configuration
+# See https://ghostty.org/docs/config for all options
+
+macos-option-as-alt = true
+
+# Disable Command+T (new tab)
+keybind = cmd+t=unbind
+
+# Disable Command+B (split)
+keybind = cmd+b=unbind

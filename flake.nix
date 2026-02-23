@@ -84,6 +84,7 @@
                   pkgs.wasmtime
                   pkgs.mise
                   pkgs.emacs
+                  pkgs.lean4
                 ];
                 homebrew = {
                   enable = true;
@@ -104,8 +105,9 @@
                     "alacritty"
                     "amethyst"
                     "discord"
+                    "figma"
                     "docker-desktop"
-                    "neovide"
+                    "neovide-app"
                     "openscad@snapshot"
                     "prusaslicer"
                     "slack"
@@ -115,6 +117,7 @@
                     "claude-code"
                     "copilot-cli"
                     "forklift"
+                    "ghostty"
                   ];
                 };
               }
@@ -139,6 +142,9 @@
                       };
                       home.file."Library/Application Support/nushell" = {
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/nushell-config";
+                      };
+                      home.file."Library/Application Support/com.mitchellh.ghostty/config" = {
+                        source = config.lib.file.mkOutOfStoreSymlink "${workdir}/ghostty-config";
                       };
                       programs.tmux = {
                         enable = true;
