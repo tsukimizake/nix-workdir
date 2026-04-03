@@ -17,4 +17,4 @@ edit QUERY:
     nu ./nix-edit.nu {{ QUERY }}
 
 setup:
-    sudo nix run nix-darwin  --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --impure --flake .#(sys host | get hostname | split row '.' | first)
+    let hn = (sys host | get hostname | split row '.' | first); sudo env $"HOST=($hn)" nix run nix-darwin --extra-experimental-features nix-command --extra-experimental-features flakes -- switch --impure --flake $".#($hn)"

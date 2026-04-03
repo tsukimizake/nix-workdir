@@ -116,7 +116,6 @@
                     "vnc-viewer"
                     "azookey"
                     "claude-code"
-                    "copilot-cli"
                     "forklift"
                     "ghostty"
                   ];
