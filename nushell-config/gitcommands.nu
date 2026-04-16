@@ -15,9 +15,9 @@ export def reb [] {
 export def cre [name : string, trelloid?: string] {
   fetch
   if trelloid != null {
-    git switch -c $"($name)_TR.($trelloid)" origin/(master_or_main)
+    git switch -c $"($name).($trelloid)" origin/(master_or_main)
   } else {
-    git switch -c $"($name)_TR.(trello_current_sprint)" origin/(master_or_main)
+    git switch -c $"($name).(trello_current_sprint)" origin/(master_or_main)
   }
 }
 
@@ -53,7 +53,7 @@ export def obsolete [] {
 
 export def cresame [name : string] {
   let trelloid = git branch --show-current 
-                  | parse -r '.*_TR\.(?P<id>.*)' 
+                  | parse -r '.*\.(?P<id>.*)' 
                   | get id 
                   | first
   cre $name $trelloid
@@ -73,7 +73,7 @@ export def chore_pr_with_diff [pr_title: string, pr_body: string, trello_id?: st
     finish
   } catch {
     git switch (master_or_main)
-    git branch -D $"chore_pr_branch_TR.($trello_id)"
+    git branch -D $"chore_pr_branch.($trello_id)"
     # TODO when trello_id is null
   }
   git switch $before_branch
@@ -96,7 +96,7 @@ export def chore_pr_head_commit [pr_title: string, pr_body: string, trello_id?: 
   git switch $before_branch
   } catch {
     git switch (master_or_main)
-    git branch -D $"chore_pr_branch_TR.($trello_id)"
+    git branch -D $"chore_pr_branch.($trello_id)"
     # TODO when trello_id is null
   }
 }

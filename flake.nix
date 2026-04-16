@@ -84,8 +84,11 @@
                   pkgs.wasm-tools
                   pkgs.wasmtime
                   pkgs.mise
+                  pkgs.ffmpeg
                   pkgs.emacs
-                  pkgs.lean4
+                  pkgs.elan
+                  pkgs.isabelle
+                  pkgs.rocqPackages.rocq-core
                 ];
                 homebrew = {
                   enable = true;
