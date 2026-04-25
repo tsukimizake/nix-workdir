@@ -84,9 +84,9 @@
                   pkgs.wasm-tools
                   pkgs.wasmtime
                   pkgs.mise
-                  pkgs.ffmpeg
                   pkgs.emacs
                   pkgs.elan
+                  pkgs.ffmpeg
                   pkgs.isabelle
                   pkgs.rocqPackages.rocq-core
                 ];
@@ -104,6 +104,7 @@
                       args = [ "HEAD" ];
                     }
                     "swi-prolog"
+                    "opencode"
                   ];
                   casks = [
                     "ghostty"
@@ -118,9 +119,9 @@
                     "steam"
                     "vnc-viewer"
                     "azookey"
-                    "claude-code"
+                    "claude-code@latest"
+                    "copilot-cli"
                     "forklift"
-                    "ghostty"
                   ];
                 };
               }
@@ -142,6 +143,10 @@
                       ];
                       home.file.".config/alacritty/alacritty.toml" = {
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/alacritty.toml";
+                        force = true;
+                      };
+                      home.file.".config/opencode" = {
+                        source = config.lib.file.mkOutOfStoreSymlink "${workdir}/opencode-config";
                         force = true;
                       };
                       home.file."Library/Application Support/nushell" = {

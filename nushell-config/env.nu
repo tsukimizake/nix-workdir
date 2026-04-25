@@ -111,3 +111,5 @@ if not ($nu.cache-dir | path exists) {
     mkdir $nu.cache-dir
 }
 ^mise activate nu | save $mise_path --force
+
+$env.SHELL = (which nu | get path.0)
