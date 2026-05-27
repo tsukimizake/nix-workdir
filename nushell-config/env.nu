@@ -79,7 +79,7 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
 ]
 
-# source '~/openai-key.nu'
+source '~/.keys.nu'
 
 
 

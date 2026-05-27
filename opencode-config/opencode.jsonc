@@ -1,10 +1,27 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "plan": {
+      "model": "anthropic/claude-opus-4-7"
+    },
+    "build": {
+      "model": "opencode-go/glm-5.1"
+    }
+  },
   "mcp": {
     "tidewave": {
       "type": "remote",
       "url": "http://localhost:4000/tidewave/mcp",
       "enabled": true
+    },
+    "figma": {
+      "type": "local",
+      "command": ["npx", "-y", "figma-developer-mcp", "--stdio"],
+      "environment": {
+        "FIGMA_API_KEY": "{env:FIGMA_API_KEY}"
+      },
+      "enabled": true,
+      "timeout": 30000
     }
   }
 }

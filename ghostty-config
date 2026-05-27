@@ -1,6 +1,9 @@
 # Ghostty configuration
 # See https://ghostty.org/docs/config for all options
 
+font-family = HackGenNerd Console
+font-size = 14
+
 macos-option-as-alt = true
 
 # Disable Command+T (new tab)
