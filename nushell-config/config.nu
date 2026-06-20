@@ -816,6 +816,7 @@ $env.config = {
 
 use trellocommands.nu *
 use gitcommands.nu *
+use ~/workdir/todolist/todolist.nu *
 
 alias vis = ^nvim -S ~/.vim.session
 
