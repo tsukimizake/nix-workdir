@@ -15,6 +15,7 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flix.url = "github:Cj-bc/flix.nix";
   };
 
   outputs =
@@ -23,6 +24,7 @@
       nixpkgs,
       home-manager,
       nix-darwin,
+      flix,
     }:
     let
       mkDarwinSystem =
@@ -65,6 +67,7 @@
                   pkgs.qmk
                   pkgs.tmux
                   pkgs.ninja
+                  pkgs.cmake
                   pkgs.ripgrep
                   pkgs.fzf
                   pkgs.git
@@ -89,6 +92,9 @@
                   pkgs.ffmpeg
                   pkgs.isabelle
                   pkgs.rocqPackages.rocq-core
+                  pkgs.anthy
+                  pkgs.croc
+                  flix.packages.aarch64-darwin.flix_0_73_0
                 ];
                 homebrew = {
                   enable = true;
