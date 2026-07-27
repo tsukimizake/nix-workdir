@@ -110,7 +110,6 @@
                       args = [ "HEAD" ];
                     }
                     "swi-prolog"
-                    "opencode"
                   ];
                   casks = [
                     "ghostty"
