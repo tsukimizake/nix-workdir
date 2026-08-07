@@ -137,21 +137,30 @@
               {
                 home-manager = {
                   users.tsukimizake =
-                    { pkgs, config, ... }:
+                    {
+                      pkgs,
+                      config,
+                      lib,
+                      ...
+                    }:
                     let
                       workdir = "/Users/tsukimizake/workdir";
                     in
                     {
                       home.stateVersion = "23.11";
+                      # force = true はファイル/symlinkしか上書きできないため、
+                      # nushellが生成した実ディレクトリはリンク作成前に消す
+                      home.activation.removeNushellConfigDir = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+                        nushellDir="$HOME/Library/Application Support/nushell"
+                        if [ -e "$nushellDir" ] && [ ! -L "$nushellDir" ]; then
+                          run rm -rf "$nushellDir"
+                        fi
+                      '';
                       home.packages = [
                         pkgs.hackgen-nf-font
                       ];
                       home.file.".config/alacritty/alacritty.toml" = {
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/alacritty.toml";
-                        force = true;
-                      };
-                      home.file.".config/opencode" = {
-                        source = config.lib.file.mkOutOfStoreSymlink "${workdir}/opencode-config";
                         force = true;
                       };
                       home.file."Library/Application Support/nushell" = {
