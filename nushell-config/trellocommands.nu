@@ -12,6 +12,7 @@ export module trello {
 
   export def fzf_working_cards [] {
     let res = ^npx trello card:list --board="Dev / 開発スプリント" --list="Working" 
+    | lines
     | parse "{name} (ID: {id})"
     
     let chosen_name = $res | fzflist name | get name
@@ -20,6 +21,7 @@ export module trello {
   }
   export def fzf_reviewing_cards [] {
     let res = ^npx trello card:list --board="Dev / 開発スプリント" --list="Reviewing/Testing/Waiting updates" 
+    | lines
     | parse "{name} (ID: {id})"
     
     let chosen_name = $res | fzflist name | get name
@@ -29,6 +31,7 @@ export module trello {
 
   export def fzf_my_cards [] {
     let res = ^npx trello card:assigned-to 
+    | lines
     | parse "{name} (ID: {id}, Board: {board}, List: {list})"
     | where {|| $in | get list | not ($in =~ "Done" or $in =~ "改修完了")}
 
