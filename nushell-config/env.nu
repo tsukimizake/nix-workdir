@@ -106,6 +106,16 @@ prepend_path $'($env.BUN_INSTALL)/bin'
 $env.DENOPS_TEST_DENOPS_PATH = "/Users/tsukimizake/denops.vim/"
 $env.EDITOR = "nvim"
 
+# nix の dotnet は nix の ICU と macOS の libicucore のシンボル衝突で SIGABRT するため globalization を無効化
+$env.DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1"
+# dotnet tool の apphost が runtime を探すのに必要
+# dotnet が無い環境(GUIアプリから起動された子シェル等)でも env.nu が止まらないようガードする
+let dotnet_which = (which dotnet)
+
+if ($dotnet_which | is-not-empty) {
+    $env.DOTNET_ROOT = ($dotnet_which | get path.0 | path expand | path dirname)
+}
+
 let mise_path = $nu.cache-dir | path join mise.nu
 if not ($nu.cache-dir | path exists) {
     mkdir $nu.cache-dir

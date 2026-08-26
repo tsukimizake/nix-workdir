@@ -79,8 +79,7 @@
                   pkgs.just
                   pkgs.luarocks
                   pkgs.neovim-remote
-                  pkgs.nushell
-                  pkgs.redo
+                  pkgs.goredo
                   pkgs.rlwrap
                   pkgs.terminal-notifier
                   pkgs.tree-sitter
@@ -94,8 +93,16 @@
                   pkgs.rocqPackages.rocq-core
                   pkgs.anthy
                   pkgs.croc
+                  pkgs.dotnet-sdk_10
+                  pkgs.fantomas
                   flix.packages.aarch64-darwin.flix_0_73_0
                 ];
+                environment.variables = {
+                  # nix の dotnet は nix の ICU と macOS の libicucore のシンボル衝突で SIGABRT するため globalization を無効化
+                  DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1";
+                  # dotnet tool の apphost が runtime を探すのに必要 (PATH は見ない)
+                  DOTNET_ROOT = "${pkgs.dotnet-sdk_10}/share/dotnet";
+                };
                 homebrew = {
                   enable = true;
                   user = "tsukimizake";
@@ -103,6 +110,7 @@
                     "daipeihust/tap"
                   ];
                   brews = [
+                    "nushell"
                     "im-select"
                     "unixodbc"
                     {
