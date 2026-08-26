@@ -103,6 +103,18 @@
                   # dotnet tool の apphost が runtime を探すのに必要 (PATH は見ない)
                   DOTNET_ROOT = "${pkgs.dotnet-sdk_10}/share/dotnet";
                 };
+                # バイナリは ~/.local/spacemouse-arbiter で `just build` する
+                # (nix でビルドすると再ビルドのたびに Accessibility 許可の手動再登録が必要になるため)
+                launchd.user.agents.spacemouse-arbiter = {
+                  serviceConfig = {
+                    Label = "local.spacemouse-arbiter";
+                    ProgramArguments = [ "/Users/tsukimizake/.local/bin/spacemouse-arbiter" ];
+                    RunAtLoad = true;
+                    KeepAlive = true;
+                    StandardOutPath = "/Users/tsukimizake/Library/Logs/spacemouse-arbiter.log";
+                    StandardErrorPath = "/Users/tsukimizake/Library/Logs/spacemouse-arbiter.log";
+                  };
+                };
                 homebrew = {
                   enable = true;
                   user = "tsukimizake";
@@ -177,6 +189,14 @@
                       };
                       home.file."Library/Application Support/com.mitchellh.ghostty/config" = {
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/ghostty-config";
+                        force = true;
+                      };
+                      home.file.".config/spacemouse-arbiter/apps.txt" = {
+                        source = config.lib.file.mkOutOfStoreSymlink "/Users/tsukimizake/.local/spacemouse-arbiter/apps.txt";
+                        force = true;
+                      };
+                      home.file.".config/spacemouse-arbiter/settings.txt" = {
+                        source = config.lib.file.mkOutOfStoreSymlink "/Users/tsukimizake/.local/spacemouse-arbiter/settings.txt";
                         force = true;
                       };
                       programs.tmux = {
