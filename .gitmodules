@@ -1,0 +1,3 @@
+[submodule "todolist"]
+	path = todolist
+	url = git@github.com:tsukimizake/todolist.git
