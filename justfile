@@ -11,7 +11,7 @@ fmt:
     nixfmt flake.nix
 
 search QUERY:
-    nix search nixpkgs {{ QUERY }}
+    nix search --extra-experimental-features nix-command nixpkgs --extra-experimental-features flakes {{ QUERY }}
 
 edit QUERY:
     nu ./nix-edit.nu {{ QUERY }}
