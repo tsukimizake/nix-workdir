@@ -95,6 +95,7 @@
                   pkgs.croc
                   pkgs.dotnet-sdk_10
                   pkgs.fantomas
+                  pkgs.typst
                   flix.packages.aarch64-darwin.flix_0_73_0
                 ];
                 environment.variables = {
