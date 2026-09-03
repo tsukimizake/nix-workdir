@@ -51,7 +51,19 @@ $env.PROMPT_COMMAND = {|| create_left_prompt }
 $env.PROMPT_INDICATOR = {|| "> " }
 $env.PROMPT_MULTILINE_INDICATOR = {|| "::: " }
 $env.PROMPT_COMMAND_RIGHT = {|| "" }
-$env.PROMPT_COMMAND = {|| $"(ansi reset)(ansi magenta)(date now | format date "%Y-%m-%dT%H:%M:%S%z")\n(pwd)" }
+# 非gitディレクトリでは空文字、detached HEADでは短縮ハッシュを返す
+def git_branch_segment [] {
+    let branch = (do { ^git symbolic-ref --short -q HEAD } | complete)
+    if $branch.exit_code == 0 {
+        return $"(ansi blue)[($branch.stdout | str trim)] "
+    }
+    let detached = (do { ^git rev-parse --short HEAD } | complete)
+    if $detached.exit_code == 0 {
+        return $"(ansi yellow)[detached ($detached.stdout | str trim)] "
+    }
+    ""
+}
+$env.PROMPT_COMMAND = {|| $"(ansi reset)(ansi magenta)(date now | format date "%Y-%m-%dT%H:%M:%S%z")\n(pwd)(git_branch_segment)" }
 
 # Specifies how environment variables are:
 # - converted from a string to a value on Nushell startup (from_string)
