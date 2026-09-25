@@ -45,6 +45,23 @@
                   home = "/Users/tsukimizake";
                 };
 
+                nix.settings.experimental-features = [
+                  "nix-command"
+                  "flakes"
+                ];
+                nix.linux-builder = {
+                  enable = true;
+                  ephemeral = true;
+                  maxJobs = 4;
+                  config.virtualisation = {
+                    cores = 6;
+                    darwin-builder = {
+                      diskSize = 40 * 1024;
+                      memorySize = 8 * 1024;
+                    };
+                  };
+                };
+
                 environment.systemPath = [
                   "/opt/homebrew/bin"
                   "/opt/homebrew/sbin"
@@ -96,6 +113,7 @@
                   pkgs.dotnet-sdk_10
                   pkgs.fantomas
                   pkgs.typst
+                  pkgs.pi-coding-agent
                   flix.packages.aarch64-darwin.flix_0_73_0
                 ];
                 environment.variables = {
@@ -142,7 +160,6 @@
                     "figma"
                     "docker-desktop"
                     "neovide-app"
-                    "openscad@snapshot"
                     "prusaslicer"
                     "slack"
                     "steam"
