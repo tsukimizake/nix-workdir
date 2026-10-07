@@ -183,10 +183,6 @@
                       home.packages = [
                         pkgs.hackgen-nf-font
                       ];
-                      home.file.".config/alacritty/alacritty.toml" = {
-                        source = config.lib.file.mkOutOfStoreSymlink "${workdir}/alacritty.toml";
-                        force = true;
-                      };
                       home.file."Library/Application Support/nushell" = {
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/nushell-config";
                         force = true;
