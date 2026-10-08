@@ -110,6 +110,7 @@ prepend_path '/Users/tsukimizake/.cabal/bin'
 prepend_path '/Users/tsukimizake/.local/bin'
 prepend_path '/Users/tsukimizake/.deno/bin'
 prepend_path '/Users/tsukimizake/.claude/local/'
+prepend_path '/opt/homebrew/opt/openssl@3/bin'
 
 $env.BUN_INSTALL = $"($env.HOME)/.bun"
 prepend_path $'($env.BUN_INSTALL)/bin'
