@@ -16,6 +16,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flix.url = "github:Cj-bc/flix.nix";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -25,6 +29,7 @@
       home-manager,
       nix-darwin,
       flix,
+      rust-overlay,
     }:
     let
       mkDarwinSystem =
@@ -35,7 +40,22 @@
           modules = [
             (
               { config, pkgs, ... }:
+              let
+                rust = pkgs.rust-bin.fromRustupToolchainFile /Users/tsukimizake/trello-cli-2/rust-toolchain.toml;
+                trello2 =
+                  (pkgs.makeRustPlatform {
+                    cargo = rust;
+                    rustc = rust;
+                  }).buildRustPackage
+                    {
+                      pname = "trello2";
+                      version = "0.1.0";
+                      src = pkgs.lib.cleanSource /Users/tsukimizake/trello-cli-2;
+                      cargoLock.lockFile = /Users/tsukimizake/trello-cli-2/Cargo.lock;
+                    };
+              in
               {
+                nixpkgs.overlays = [ rust-overlay.overlays.default ];
                 system = {
                   stateVersion = 5;
                   primaryUser = "tsukimizake";
@@ -111,6 +131,7 @@
                   pkgs.fantomas
                   pkgs.typst
                   pkgs.pi-coding-agent
+                  trello2
                   flix.packages.aarch64-darwin.flix_0_73_0
                 ];
                 environment.variables = {
