@@ -20,6 +20,10 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    trello-cli-2 = {
+      url = "git+https://github.com/tsukimizake/trello-cli-2";
+      flake = false;
+    };
   };
 
   outputs =
@@ -30,6 +34,7 @@
       nix-darwin,
       flix,
       rust-overlay,
+      trello-cli-2,
     }:
     let
       mkDarwinSystem =
@@ -41,7 +46,7 @@
             (
               { config, pkgs, ... }:
               let
-                rust = pkgs.rust-bin.fromRustupToolchainFile /Users/tsukimizake/trello-cli-2/rust-toolchain.toml;
+                rust = pkgs.rust-bin.fromRustupToolchainFile "${trello-cli-2}/rust-toolchain.toml";
                 trello2 =
                   (pkgs.makeRustPlatform {
                     cargo = rust;
@@ -50,8 +55,8 @@
                     {
                       pname = "trello2";
                       version = "0.1.0";
-                      src = pkgs.lib.cleanSource /Users/tsukimizake/trello-cli-2;
-                      cargoLock.lockFile = /Users/tsukimizake/trello-cli-2/Cargo.lock;
+                      src = trello-cli-2;
+                      cargoLock.lockFile = "${trello-cli-2}/Cargo.lock";
                     };
               in
               {

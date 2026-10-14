@@ -5,6 +5,8 @@ default:
     just run
 
 run:
+    # private な trello-cli-2 は root だと認証できないので、先にユーザー権限で store に取得しておく
+    nix --extra-experimental-features "nix-command flakes" flake archive
     let hn = (sys host | get hostname | split row '.' | first); sudo env $"HOST=($hn)" darwin-rebuild switch --impure --flake $".#($hn)"
 
 fmt:

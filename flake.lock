@@ -112,7 +112,8 @@
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_2",
-        "rust-overlay": "rust-overlay"
+        "rust-overlay": "rust-overlay",
+        "trello-cli-2": "trello-cli-2"
       }
     },
     "rust-overlay": {
@@ -133,6 +134,22 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "type": "github"
+      }
+    },
+    "trello-cli-2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791884156,
+        "narHash": "sha256-N2Rrgxkg0tM9p3PP6D2Y+pMbeO3dIDeVWYDQp/PZzFg=",
+        "ref": "refs/heads/master",
+        "rev": "49c79676cea136e999d95461ec99ab0a450ec023",
+        "revCount": 6,
+        "type": "git",
+        "url": "https://github.com/tsukimizake/trello-cli-2"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://github.com/tsukimizake/trello-cli-2"
       }
     }
   },
