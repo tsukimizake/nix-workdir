@@ -190,7 +190,6 @@
                     "prusaslicer"
                     "slack"
                     "steam"
-                    "vnc-viewer"
                     "azookey"
                     "claude-code@latest"
                     "copilot-cli"
@@ -228,6 +227,7 @@
                       '';
                       home.packages = [
                         pkgs.hackgen-nf-font
+                        pkgs.tigervnc
                       ];
                       home.file."Library/Application Support/nushell" = {
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/nushell-config";
