@@ -79,6 +79,10 @@
                   ephemeral = true;
                   maxJobs = 4;
                   config.virtualisation = {
+                    qemu.options = [
+                      "-machine"
+                      "virt,gic-version=3,accel=hvf:tcg"
+                    ];
                     cores = 6;
                     darwin-builder = {
                       diskSize = 40 * 1024;
