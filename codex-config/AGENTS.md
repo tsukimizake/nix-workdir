@@ -9,3 +9,4 @@
 - cssでの色指定にはpaletteを使う。
     - 近い色がない場合はPalette.elmに新規作成する。
 - レコードのフィールド書き込みはRecordSetterのセッターを使う。新規定義したレコードについてもsetemで自動で生成される。
+    - RecordSetterはexpose(..)してよい
