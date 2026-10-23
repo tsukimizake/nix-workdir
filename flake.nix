@@ -227,7 +227,7 @@
                       '';
                       home.packages = [
                         pkgs.hackgen-nf-font
-                        pkgs.tigervnc
+                        (pkgs.writeShellScriptBin "vncviewer" "exec ${pkgs.tigervnc}/Applications/TigerVNC.app/Contents/MacOS/vncviewer \"$@\"")
                       ];
                       home.file."Library/Application Support/nushell" = {
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/nushell-config";
@@ -235,6 +235,10 @@
                       };
                       home.file."Library/Application Support/com.mitchellh.ghostty/config" = {
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/ghostty-config";
+                        force = true;
+                      };
+                      home.file.".codex/AGENTS.md" = {
+                        source = config.lib.file.mkOutOfStoreSymlink "${workdir}/codex-config/AGENTS.md";
                         force = true;
                       };
                       home.file.".config/spacemouse-arbiter/apps.txt" = {
