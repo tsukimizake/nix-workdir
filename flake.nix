@@ -241,6 +241,10 @@
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/codex-config/AGENTS.md";
                         force = true;
                       };
+                      home.file.".codex/skills/nvim-review/SKILL.md" = {
+                        source = config.lib.file.mkOutOfStoreSymlink "${workdir}/codex-config/skills/nvim-review/SKILL.md";
+                        force = true;
+                      };
                       home.file.".config/spacemouse-arbiter/apps.txt" = {
                         source = config.lib.file.mkOutOfStoreSymlink "/Users/tsukimizake/.local/spacemouse-arbiter/apps.txt";
                         force = true;
