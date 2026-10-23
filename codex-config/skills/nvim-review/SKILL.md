@@ -9,7 +9,7 @@ description: Neovim (diffview) 上で人間が付けたレビューコメント�
 コメントは `/tmp/nvim-review/<project>/<branch>/comments.json` に追記される。
 `<branch>` はコメントを付けたときに checkout していたブランチ名で、`feature/foo` のようなスラッシュはそのままディレクトリになる。detached HEAD なら短縮 SHA（11 桁）。
 `<project>` は git ルートの実パス（シンボリックリンクを解決した絶対パス）を改行なしで SHA-256 にした値。プロジェクトと worktree ごとに保存先が分かれる。`/tmp` の掃除や再起動でコメントが消えることがある。
-AI は **現在のブランチ** のファイルを読んで対応する。パスは以下で求める。
+AI は 現在のブランチ のファイルを読んで対応する。パスは以下で求める。
 
 ```nu
 let repo = (git rev-parse --show-toplevel | str trim | path expand --strict)
@@ -53,9 +53,9 @@ let f = ($review_dir | path join $branch "comments.json")
 - アンカーは `rev` + `filePath` + `line`。`endLine` があれば範囲選択。
 - `rev` はそのバッファが表示していたリビジョン。
   - `LOCAL`: 作業ツリー。`filePath` をそのまま開けばよい。
-  - 短縮 SHA（11 桁）: そのコミット時点の内容。**行番号はそのリビジョンでのもの**なので、`git show <rev>:<filePath>` で本文を読む。
+  - 短縮 SHA（11 桁）: そのコミット時点の内容。行番号はそのリビジョンでのものなので、`git show <rev>:<filePath>` で本文を読む。
 - `filePath` は git ルートからの相対パスで、`rev` 時点でのパス（リネーム前後で異なりうる）。
-- `summary` が 1 行目、`rationale` が残り。**本文はこの 2 つを原文のまま扱う。要約しない。**
+- `summary` が 1 行目、`rationale` が残り。本文はこの 2 つを原文のまま扱う。要約しない。
 - `status` は `open` / `fixed` / `question` / `answered`。AI が更新する。
 - `response` は AI が対応内容を書き戻すフィールド（任意）。
 
@@ -90,15 +90,15 @@ open $f | get comments | where status == open | select id filePath line endLine?
 
 記録は `comments.json` に行う。`open` なコメントを1件も残さない。出口は以下の3種。
 
-1. **修正** — 指摘が明確で妥当なとき。指摘の言葉どおりの範囲だけ直す。ついでのリファクタは混ぜず、`response` に「別途提案」として書く。
-2. **逆質問** — 意図が読み取れない、複数の解釈で結果が変わるとき。解釈の候補とそれぞれの帰結を示して聞く。他の項目は先に片付ける。
-3. **返答** — 修正しない方がよいと考えるとき。黙って無視しない。理由を述べ、それでも直してほしければ対応すると選択権を返す。
+1. 修正 — 指摘が明確で妥当なとき。指摘の言葉どおりの範囲だけ直す。ついでのリファクタは混ぜず、`response` に「別途提案」として書く。
+2. 逆質問 — 意図が読み取れない、複数の解釈で結果が変わるとき。解釈の候補とそれぞれの帰結を示して聞く。他の項目は先に片付ける。
+3. 返答 — 修正しない方がよいと考えるとき。黙って無視しない。理由を述べ、それでも直してほしければ対応すると選択権を返す。
 
 修正が済んだら、そのラウンドの変更をまとめてプロジェクトの lint / format / test にかける。コマンドはそのリポジトリの CLAUDE.md / AGENTS.md に従う。
 
 ### 3. ファイルに書き戻す
 
-各コメントの `status` と `response` を更新する。**他のフィールドは変更・削除しない**（Neovim 側の表示と id 参照が壊れる）。
+各コメントの `status` と `response` を更新する。他のフィールドは変更・削除しない（Neovim 側の表示と id 参照が壊れる）。
 
 - 修正した → `"status": "fixed"`, `"response": "何をどう直したか"`
 - 逆質問した → `"status": "question"`, `"response": "質問文"`
@@ -115,18 +115,18 @@ open $f | get comments | where status == open | select id filePath line endLine?
 open $f | get comments | get status | uniq --count
 ```
 
-**`question` が残っているなら未クローズであることを明言する。** 「全部対応しました」と言えるのは `open` と `question` が 0 件のときだけ。
+`question` が残っているなら未クローズであることを明言する。 「全部対応しました」と言えるのは `open` と `question` が 0 件のときだけ。
 
 ## 他者の PR をレビューしている場合
 
-自分（AI）が実装者ではなく、人間が他者の PR を読んでいる場合は **read-only**。
+自分（AI）が実装者ではなく、人間が他者の PR を読んでいる場合は read-only。
 コードを直さず、`git checkout` もしない。各コメントについて指摘が成立するかを事実で示し、
 PR に貼れる文面を `response` に書く。PR への投稿（`gh pr review` 等）はしない。貼るかどうかはレビュアーが決める。
 
 ## 落とし穴
 
-- **要約による意図の消失** — 報告と `response` では原文を引用する。
-- **`rev` の見落とし** — `rev` がコミット SHA のコメントを作業ツリーの行番号で読むとズレる。
-- **リネームされたファイル** — 旧リビジョンで付けたコメントの `filePath` はリネーム前のパス。作業ツリーに同名ファイルが無ければ `git log --follow` か diff の rename 情報で新パスを引き当て、`git show <rev>:<filePath>` で本文を読む。Neovim 側では作業ツリーのバッファに表示されないので、ユーザが「見えない」と言ったらこのケースを疑う。
-- **ファイルの上書き** — `comments.json` を書き戻すときは `status` / `response` 以外を触らない。整形し直す場合も 1 コメント 1 行の形を保つ。
-- **完了後の掃除** — 全項目クローズ後にコメントを消したい場合は、ユーザに確認してから `comments.json` の該当エントリを削除する（履歴を PR 本文に使いたいことがある）。
+- 要約による意図の消失 — 報告と `response` では原文を引用する。
+- `rev` の見落とし — `rev` がコミット SHA のコメントを作業ツリーの行番号で読むとズレる。
+- リネームされたファイル — 旧リビジョンで付けたコメントの `filePath` はリネーム前のパス。作業ツリーに同名ファイルが無ければ `git log --follow` か diff の rename 情報で新パスを引き当て、`git show <rev>:<filePath>` で本文を読む。Neovim 側では作業ツリーのバッファに表示されないので、ユーザが「見えない」と言ったらこのケースを疑う。
+- ファイルの上書き — `comments.json` を書き戻すときは `status` / `response` 以外を触らない。整形し直す場合も 1 コメント 1 行の形を保つ。
+- 完了後の掃除 — 全項目クローズ後にコメントを消したい場合は、ユーザに確認してから `comments.json` の該当エントリを削除する（履歴を PR 本文に使いたいことがある）。
