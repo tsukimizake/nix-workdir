@@ -214,6 +214,12 @@
                     }:
                     let
                       workdir = "/Users/tsukimizake/workdir";
+                      piPackages = [
+                        "npm:pi-figma-mcp@0.1.2"
+                        "npm:pi-review@1.2.1"
+                        "npm:pi-web-access@0.46.0"
+                        "npm:pi-mcp-adapter@7.0.0"
+                      ];
                     in
                     {
                       home.stateVersion = "23.11";
@@ -241,6 +247,23 @@
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/codex-config/AGENTS.md";
                         force = true;
                       };
+                      home.file.".pi/agent/AGENTS.md" = {
+                        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.codex/AGENTS.md";
+                        force = true;
+                      };
+                      home.file.".pi/agent/mcp-adapter.json" = {
+                        source = config.lib.file.mkOutOfStoreSymlink "${workdir}/pi-config/mcp-adapter.json";
+                        force = true;
+                      };
+                      home.file.".pi/agent/web-search.json" = {
+                        source = config.lib.file.mkOutOfStoreSymlink "${workdir}/pi-config/web-search.json";
+                        force = true;
+                      };
+                      home.activation.installPiPackages = lib.hm.dag.entryAfter [ "linkGeneration" ] (
+                        lib.concatMapStringsSep "\n" (source: ''
+                          run ${pkgs.nushell}/bin/nu --no-config-file -c '${pkgs.pi-coding-agent}/bin/pi install ${source}'
+                        '') piPackages
+                      );
                       home.file.".agents/skills/nvim-review" = {
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/codex-config/skills/nvim-review";
                         force = true;

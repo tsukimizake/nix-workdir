@@ -1,0 +1,7 @@
+{
+  "imports": ["codex"],
+  "settings": {
+    "projectServers": "ask",
+    "semanticSearch": false
+  }
+}

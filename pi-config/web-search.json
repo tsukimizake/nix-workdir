@@ -1,0 +1,12 @@
+{
+  "provider": "duckduckgo",
+  "workflow": "none",
+  "allowBrowserCookies": false,
+  "fetchRouting": {
+    "providers": ["http"],
+    "allowRemoteHostedProviders": false
+  },
+  "pdf": {
+    "provider": "unpdf"
+  }
+}
