@@ -219,6 +219,7 @@
                         "npm:pi-review@1.2.1"
                         "npm:pi-web-access@0.46.0"
                         "npm:pi-mcp-adapter@7.0.0"
+                        "npm:pi-btw@0.8.1"
                       ];
                     in
                     {
