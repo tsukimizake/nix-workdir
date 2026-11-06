@@ -215,11 +215,12 @@
                     let
                       workdir = "/Users/tsukimizake/workdir";
                       piPackages = [
-                        "npm:pi-figma-mcp@0.1.2"
-                        "npm:pi-review@1.2.1"
-                        "npm:pi-web-access@0.46.0"
-                        "npm:pi-mcp-adapter@7.0.0"
-                        "npm:pi-btw@0.8.1"
+                        "npm:pi-figma-mcp"
+                        "npm:pi-review"
+                        "npm:pi-web-access"
+                        "npm:pi-mcp-adapter"
+                        "npm:pi-btw"
+                        "git:github.com/AkisySama/pi-quiet-tool-calls"
                       ];
                     in
                     {
@@ -262,7 +263,7 @@
                       };
                       home.activation.installPiPackages = lib.hm.dag.entryAfter [ "linkGeneration" ] (
                         lib.concatMapStringsSep "\n" (source: ''
-                          run ${pkgs.nushell}/bin/nu --no-config-file -c '$env.PATH = ($env.PATH | prepend "${pkgs.nodejs}/bin"); ${pkgs.pi-coding-agent}/bin/pi install ${source}'
+                          run ${pkgs.nushell}/bin/nu --no-config-file -c '$env.PATH = ($env.PATH | prepend ["${pkgs.nodejs}/bin" "${pkgs.git}/bin"]); ${pkgs.pi-coding-agent}/bin/pi install ${source}'
                         '') piPackages
                       );
                       home.file.".agents/skills/nvim-review" = {
