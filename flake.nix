@@ -210,6 +210,7 @@
                       pkgs,
                       config,
                       lib,
+                      darwinConfig,
                       ...
                     }:
                     let
@@ -263,7 +264,7 @@
                       };
                       home.activation.installPiPackages = lib.hm.dag.entryAfter [ "linkGeneration" ] (
                         lib.concatMapStringsSep "\n" (source: ''
-                          run ${pkgs.nushell}/bin/nu --no-config-file -c '$env.PATH = ($env.PATH | prepend ["${pkgs.nodejs}/bin" "${pkgs.git}/bin"]); ${pkgs.pi-coding-agent}/bin/pi install ${source}'
+                          run ${pkgs.nushell}/bin/nu --no-config-file -c '$env.PATH = ($env.PATH | prepend ["${darwinConfig.system.path}/bin" "/usr/bin" "/bin"]); ${pkgs.pi-coding-agent}/bin/pi install ${source}'
                         '') piPackages
                       );
                       home.file.".agents/skills/nvim-review" = {
