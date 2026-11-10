@@ -139,7 +139,6 @@
                   pkgs.dotnet-sdk_10
                   pkgs.fantomas
                   pkgs.typst
-                  pkgs.pi-coding-agent
                   trello2
                   flix.packages.aarch64-darwin.flix_0_73_0
                 ];
@@ -171,6 +170,7 @@
                     }
                   ];
                   brews = [
+                    "pi-coding-agent"
                     "nushell"
                     "im-select"
                     "unixodbc"
@@ -264,7 +264,7 @@
                       };
                       home.activation.installPiPackages = lib.hm.dag.entryAfter [ "linkGeneration" ] (
                         lib.concatMapStringsSep "\n" (source: ''
-                          run ${pkgs.nushell}/bin/nu --no-config-file -c '$env.PATH = ($env.PATH | prepend ["${darwinConfig.system.path}/bin" "/usr/bin" "/bin"]); ${pkgs.pi-coding-agent}/bin/pi install ${source}'
+                          run ${pkgs.nushell}/bin/nu --no-config-file -c '$env.PATH = ($env.PATH | prepend ["/opt/homebrew/bin" "${darwinConfig.system.path}/bin" "/usr/bin" "/bin"]); /opt/homebrew/bin/pi install ${source}'
                         '') piPackages
                       );
                       home.file.".agents/skills/nvim-review" = {
