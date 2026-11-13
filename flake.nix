@@ -195,7 +195,6 @@
                     "slack"
                     "steam"
                     "azookey"
-                    "claude-code@latest"
                     "copilot-cli"
                     "forklift"
                     "stablyai/orca/orca"
