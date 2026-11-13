@@ -163,6 +163,10 @@
                 homebrew = {
                   enable = true;
                   user = "tsukimizake";
+                  onActivation = {
+                    autoUpdate = true;
+                    upgrade = true;
+                  };
                   taps = [
                     {
                       name = "daipeihust/tap";
