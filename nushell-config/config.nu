@@ -877,6 +877,7 @@ module plug {
 use plug
 
 source plugins.nu
+use generated/git-completions.nu *
 
 # source "/Users/tsukimizake/Library/Application Support/nushell/rtx.nu"
 

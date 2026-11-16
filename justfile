@@ -12,6 +12,13 @@ run:
 fmt:
     nixfmt flake.nix
 
+git-completions:
+    mkdir nushell-config/generated
+    let completions = (http get https://raw.githubusercontent.com/fish-shell/fish-shell/4da2a20801914288ded72e2614dd8e0b6e2ccd1a/share/completions/git.fish \
+        | generate completions git --source fish \
+        | str replace --all --regex '(?m)^#[^\n]*\n|[ \t]+#[^\n]*' ''); \
+        $completions | save --force nushell-config/generated/git-completions.nu
+
 search QUERY:
     nix search --extra-experimental-features nix-command nixpkgs --extra-experimental-features flakes {{ QUERY }}
 

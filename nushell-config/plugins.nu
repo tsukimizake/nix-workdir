@@ -8,4 +8,3 @@ source "/Users/tsukimizake/Library/Application Support/nushell/plugins/rustup-co
 source "/Users/tsukimizake/Library/Application Support/nushell/plugins/mysql-completions.nu"
 source "/Users/tsukimizake/Library/Application Support/nushell/plugins/mix-completions.nu"
 source "/Users/tsukimizake/Library/Application Support/nushell/plugins/zellij-completions.nu"
-source "/Users/tsukimizake/workdir/nushell-config/plugins/git-completions.nu"
