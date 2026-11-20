@@ -252,6 +252,10 @@
                         source = config.lib.file.mkOutOfStoreSymlink "${workdir}/codex-config/AGENTS.md";
                         force = true;
                       };
+                      home.activation.installCodexPlugins = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+                        run /opt/homebrew/bin/codex plugin marketplace add michael-denyer/pstack-claude
+                        run /opt/homebrew/bin/codex plugin add pstack@pstack-claude
+                      '';
                       home.file.".pi/agent/AGENTS.md" = {
                         source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.codex/AGENTS.md";
                         force = true;
