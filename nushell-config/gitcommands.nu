@@ -59,48 +59,20 @@ export def cresame [name : string] {
   cre $name $trelloid
 }
 export def chore_pr_with_diff [pr_title: string, pr_body: string, trello_id?: string] {
-  let before_branch = git branch --show-current | str trim
-  try {
-    if $trello_id == null {
-      cresame "chore_pr_branch"
-    } else {
-      cre "chore_pr_branch" $trello_id
-    }
-    git add .
-    git commit -m $pr_title
-    git push -u origin HEAD
-    gh pr create --title $pr_title --body $pr_body
-    finish
-  } catch {
-    git switch (master_or_main)
-    git branch -D $"chore_pr_branch.($trello_id)"
-    # TODO when trello_id is null
-  }
-  git switch $before_branch
-}
-
-export def chore_pr_head_commit [pr_title: string, pr_body: string, trello_id?: string] {
-  let before_branch = git branch --show-current | str trim
-  let head_commit_name = git log -1 --pretty=%B | str trim
-  let head_commit_id = git rev-parse HEAD | str trim
-  try {
+  let before_branch = git symbolic-ref --short HEAD | str trim
   if $trello_id == null {
     cresame "chore_pr_branch"
   } else {
     cre "chore_pr_branch" $trello_id
   }
-  git cherry-pick $head_commit_id
+  let chore_branch = git branch --show-current | str trim
+  git add .
+  git commit -m $pr_title
   git push -u origin HEAD
   gh pr create --title $pr_title --body $pr_body
-  finish
   git switch $before_branch
-  } catch {
-    git switch (master_or_main)
-    git branch -D $"chore_pr_branch.($trello_id)"
-    # TODO when trello_id is null
-  }
+  git branch -d $chore_branch
 }
-
 
 export def update_snapshots_pr [] {
   ^just e2e_update_snapshots
